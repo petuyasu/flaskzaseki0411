@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <title>main</title>
+</head>
+<body class="text-center" style="background-color:#f5f5f5"> 
+    <br>
+    <form class="form-horizontal">
+        <div class="form-group form-group-lg">
+          <label class="control-label" for="lg">こんなイメージかな。。</label>
+          <div class="col-md-4 offset-md-4">
+            <input class="form-control input-lg" type="text" id="search" placeholder="検索（なんでも）。dropdownも反応するけど">
+          </div>
+        </div>
+    </form>      
+    <br>
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">↓更新してね</th>
+                <th scope="col">status</th>
+                <th scope="col">name_k</th>
+                <th scope="col">name_r</th>
+                <th scope="col">group_t</th>
+                <th scope="col">tel</th>
+                <th scope="col">floor</th>
+                <th scope="col">area</th>
+                <th scope="col">dt</th>
+            </tr>             
+        </thead>
+        {% for i in data %}
+        <tbody id="table">
+            <tr>
+                <td scope="row">
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">変更</button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <form method="GET" action="{{url_for('update',prn=i.name_r,st='在席')}}">
+                                    <button class="dropdown-item" type="submit">在席</button>
+                                </form>
+                            </li>                                                       
+                            <li>
+                                <form method="GET" action="{{url_for('update',prn=i.name_r,st='外出')}}">
+                                    <button class="dropdown-item" type="submit">外出</button>
+                                </form>
+                            </li>                                                       
+                            <li>
+                                <form method="GET" action="{{url_for('update',prn=i.name_r,st='会議')}}">
+                                    <button class="dropdown-item" type="submit">会議</button>
+                                </form>
+                            </li>                                                       
+                            <li>
+                                <form method="GET" action="{{url_for('update',prn=i.name_r,st='テレワーク')}}">
+                                    <button class="dropdown-item" type="submit">テレワーク</button>
+                                </form>
+                            </li>                                                       
+                            <li>
+                                <form method="GET" action="{{url_for('update',prn=i.name_r,st='休み')}}">
+                                    <button class="dropdown-item" type="submit">休み</button>
+                                </form>
+                            </li>                                                       
+                        </ul>
+                    </div>
+                </td>
+                <th scope="row">{{i.status}}</th>
+                <td scope="row">{{i.name_k}}</td>
+                <td scope="row">{{i.name_r}}</td>
+                <td scope="row">{{i.group_t}}</td>
+                <td scope="row">{{i.tel}}</td>
+                <td scope="row">{{i.floor}}</td>
+                <td scope="row">{{i.area}}</td>
+                <td scope="row">{{i.dt}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <button class="btn btn-lg  btn-block" type="submit">
+        <a href="/logout"  style="text-decoration:none">ログアウト</a>
+    </button>
+    
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.js"></script>
+    <script src="/static/js/myapp.js"></script>
+</body>
+</html>
+
